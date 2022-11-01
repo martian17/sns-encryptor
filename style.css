@@ -8,6 +8,10 @@ body{
     flex-direction: column;
 }
 
+p>span{
+    display:inline-block;    
+}
+
 header{
     position:relative;
     overflow:hidden;

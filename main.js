@@ -350,25 +350,25 @@ let localeCodeMapReverse = ["EN","JP"];
     });
     let h1 = header.add("h1");
     if(locale === 0){
-        h1.add("span",0,"Public Key Message Encrypton Tool🔐","display:inline-block");
+        h1.add("span",0,"Public Key Message Encrypton Tool 🔐","display:inline-block");
     }else if (locale === 1){
         h1.add("span",0,"メッセージ","display:inline-block");
         h1.add("span",0,"暗号化サービス🔐","display:inline-block");
     }
     header.add("p",0,[
         "Encryption simplified.<br>Copy and paste your keys to encrypt your messages on YouTube, Discord, and more.",
-        "手順を踏んでコピペするだけ。YouTubeコメント欄、Discordなどどのサービスでも使えます。"
+        "<span>手順を踏んでコピペするだけ。</span><span>YouTubeコメント欄、</span><span>Discordなど、</span><span>どのサービスでも使えます。</span>"
     ][locale]);
-    let ul = header.add("ul",0,0,"max-width:500px;margin:0 auto;");
-    ul.add("h2",0,["Warning","注意事項"][locale]);
-    ul.add("li",0,[
+    let warn = header.add("div",0,0,"max-width:500px;margin:0 auto;");
+    warn.add("h2",0,["⚠️Warning⚠️","⚠️注意事項⚠️"][locale]);
+    warn.add("ul").add("li",0,[
         "Keys will be deleted every time the page refreshes for a security reason. Please keep the tab open throughout all the four steps.",
         "送信側はリロードするとセキュリティーのため古い鍵が消去されるので、タブを開けたままにしてください。"
     ][locale],"font-size:1rem;text-align:left;");
-    ul.add("li",0,[
+    /*ul.add("li",0,[
         "This site can be used on a smartphone, but it is more optimized for a use on PC.",
         "スマホでも使えますがPCをお勧めします。"
-    ][locale],"font-size:1rem;text-align:left;");
+    ][locale],"font-size:1rem;text-align:left;");*/
     //this.add("h2",0,"↓スクロールする↓");
     let content = body.add("article","class:content");
     //content.add("h2",0,"メッセージを[送りたい|受け取りたい]");
