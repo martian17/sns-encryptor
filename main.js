@@ -360,7 +360,7 @@ let localeCodeMapReverse = ["EN","JP"];
         "<span>手順を踏んでコピペするだけ。</span><span>YouTubeコメント欄、</span><span>Discordなど、</span><span>どのサービスでも使えます。</span>"
     ][locale]);
     let warn = header.add("div",0,0,"max-width:500px;margin:0 auto;");
-    warn.add("h2",0,["⚠️Warning⚠️","⚠️注意事項⚠️"][locale]);
+    //warn.add("h2",0,["⚠️Warning⚠️","⚠️注意事項⚠️"][locale]);
     warn.add("ul").add("li",0,[
         "Keys will be deleted every time the page refreshes for a security reason. Please keep the tab open throughout all the four steps.",
         "セキュリティーのためリロード時に古い鍵が消去されるので、タブを開けたままにしてください。"
