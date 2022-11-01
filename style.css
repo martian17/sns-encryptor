@@ -1,11 +1,40 @@
 body{
     margin:0px;
     font-family:Arial;
+    color: #fff;
+    background-color: #000;
+    min-height:100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 header{
     position:relative;
     overflow:hidden;
+}
+
+.content{
+    max-width: 900px;
+    margin: 2em auto 2em auto;
+    box-sizing:border-box;
+    flex:1;
+    width:100%;
+    padding: 1em;
+    overflow: hidden;
+    background-color: #fff1;
+}
+
+@media only screen and (max-width: 900px) {
+    .content{
+        margin: 2em auto 0em auto;
+    }
+}
+
+footer{
+    line-height:100px;
+    text-align:center;
+    background-color:#fff2;
+    color:#eee;
 }
 
 .selector{
@@ -20,18 +49,15 @@ header{
 .selector>span{
     display: inline-block;
     padding: 0.2em;
-    box-shadow: rgb(188 188 188) 0px 0px 10px inset;
-    background-color: #e7e7e7;
+    background-color: #666666;
 }
 
 .selector>span:hover{
-    background-color: #e7e7e7;
-    box-shadow: rgb(91 91 91) 0px 0px 10px inset;
+    background-color: #373737;
 }
 
 .selector>span.selected{
-    background-color: #e7e7e7;
-    box-shadow: rgb(91 91 91) 0px 0px 10px inset;
+    background-color: #373737;
 }
 
 
@@ -43,82 +69,53 @@ header{
     background-color: #e7e7e7;
     color: #000;
     border-radius: 0.5em;
-    box-shadow: rgb(188 188 188) 0px 0px 10px inset;
     margin: 1em;
     font-weight: 900;
 }
 
 
 .btn:hover{
-    background-color: #e7e7e7;
-    box-shadow: rgb(91 91 91) 0px 0px 10px inset;
+    background-color: #ffffff;
 }
 
-
-.underlay{
+header{
     width:100%;
     height:100%;
-    position:absolute;
-    top:0px;
-    left:0px;
-    z-index:-1;
-}
-
-.gibberish{
-    position:absolute;
-    padding:1em;
-    box-shadow: 0px 0px 10px #0008;
-    transform:translate(-50%, -50%);
-    border-radius:1em;
-}
-
-.gibberish>div{
-    position:absolute;
-    bottom:-15px;
-}
-
-.overlay{
-    width:100%;
-    height:100%;
-    background-color:#fffa;
-    color:#000;
     text-align:center;
     overflow:hidden;
 }
 
-.overlay h1{
-    margin-top:150px;
+header h1{
     font-size:6vw;
 }
 
-.overlay h2{
+header h2{
     font-size:3vw;
     font-weight:100;
 }
 
-.overlay p{
+header p{
     font-size:1.5rem;
     padding:0px 3em;
 }
 
 @media only screen and (max-width: 600px) {
-    .overlay h1{
-        margin-top:50px;
+    header h1{
         font-size:10vw;
     }
-    .overlay h2{
+    header h2{
         font-size:1.5em;
     }
-    .overlay p{
+    header p{
         font-size:1em;
     }
 }
 
 @media only screen and (min-width: 1000px) {
-    .overlay h1{
+    header h1{
         font-size:60px;
     }
-    .overlay h2{
+    header h2{
         font-size:30px;
     }
 }

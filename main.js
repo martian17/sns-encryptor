@@ -51,63 +51,6 @@ let newarr = function(n){
     return arr;
 };
 
-class Bubble extends ELEM{
-    constructor(){
-        let d = Math.floor(128+Math.random()*150);
-        if(d > 255) d = 255;
-        let gibberish = "○△□×?";
-        super(
-            "div",
-            "class:gibberish",
-            newarr(Math.random()*20+10).map(_=>gibberish[Math.floor(gibberish.length*Math.random())]).join(""),
-            `top:${Math.random()*100}%;
-            left:${Math.random()*100}%;
-            background-color:rgb(${d}, 255, ${d});`
-        );
-        this.add("div",0,0,`
-            ${d > 200 ? "right:20px" : "left:20px"};
-            border-top:15px solid rgb(${d}, 255, ${d});
-            border-left:${d > 200 ? "15px" : "0px"} solid #0000;
-            border-right:${d > 200 ? "0px" : "15px"} solid #0000;
-        `);
-        this.top_base = Math.random()*100;
-        this.left_base = Math.random()*100;
-        this.phase = Math.random()*10;
-    }
-    render(r){
-        r += this.phase;
-        this.style(`
-            transform:translate(${Math.sin(2*r)*5}px, ${Math.sin(r)*10}px) translate(-50%, -50%);
-        `);
-    }
-}
-
-
-//header singleton
-class Header extends ELEM{
-    constructor(){
-        super("header");
-        let underlay = this.add("div","class:underlay");
-        let that = this;
-        let bubbles = newarr(50).map(()=>underlay.add(new Bubble));
-        let an = function(t){
-            let d = t/1000;
-            for(let bubble of bubbles){
-                bubble.render(d);
-            }
-            requestAnimationFrame(an);
-        };
-        requestAnimationFrame(an);
-        let overlay = this.add("div","class:overlay;");
-        let h1 = overlay.add("h1");
-        h1.add("span",0,"メッセージ","display:inline-block");
-        h1.add("span",0,"暗号化サービス","display:inline-block");
-        overlay.add("p",0,"手順を踏んでコピペするだけ。YouTubeコメント欄、Discordなどどのサービスでも使えます。<br>スマホでも使えますがPCをお勧めします。");
-        overlay.add("h2",0,"↓スクロールする↓");
-    }
-};
-
-
 const Events = function(){
     const eventTable = {};
     this.on = function(type, callback){
@@ -155,20 +98,22 @@ class Selector extends ELEM{
 
 class UISection extends ELEM{
     constructor(){
-        super("section",0,0,"position:relative");
+        super("section",0,0,"position:relative;opacity:0.5;");
         this.overlay = this.add("div",0,0,`
             position:absolute;
             width:100%;
             height:100%;
-            background-color:#fff8;
+            background-color:#0000;
             visibility:visible;
         `);
     }
     hide(){
         this.overlay.style("visibility:visible;");
+        this.style("opacity:0.5;");
     }
     show(){
         this.overlay.style("visibility:hidden;");
+        this.style("opacity:1;");
     }
 };
 
@@ -179,14 +124,14 @@ class DialogueBanner extends ELEM{
     warn(msg){
         this.style(`
             visibility:visible;
-            background-color:rgb(255 177 177);;
+            background-color:rgb(255 177 177 / 71%);
         `);
         this.setInner(msg);
     }
     success(msg){
         this.style(`
             visibility:visible;
-            background-color:rgb(177 255 177);;
+            background-color:rgb(177 255 177 / 71%);
         `);
         this.setInner(msg);
     }
@@ -207,13 +152,16 @@ class TextArea extends ELEM{
     }
 };
 
+
+//actual contents with the locale applied
+
 class SenderGUI extends ELEM{
     constructor(){
-        super("div",0,0,"text-align:center;display:none;");
+        super("div",0,0,"display:none;");
         //get public key from the receiver
         let s1 = this.add(new UISection);
         s1.show();
-        s1.add("h3",0,"1. 下に相手から貰った公開鍵を貼ってください");
+        s1.add("h3",0,"2. 下に相手から貰った公開鍵を貼ってください");
         s1.input = s1.add(new TextArea);
         s1.dialogue = s1.add(new DialogueBanner);
         let pubkey;
@@ -233,7 +181,7 @@ class SenderGUI extends ELEM{
         });
         //enter the message, and click encrypt
         let s2 = this.add(new UISection);
-        s2.add("h3",0,"2. 暗号化するメッセージを入力してください");
+        s2.add("h3",0,"3. 暗号化するメッセージを入力してください");
         s2.input = s2.add(new TextArea);
         s2.btn = s2.add("div","class:btn;","暗号化する");
         s2.dialogue = s2.add(new DialogueBanner);
@@ -250,7 +198,7 @@ class SenderGUI extends ELEM{
         });
         //send the message to the receiver
         let s3 = this.add(new UISection);
-        s3.add("h3",0,"3. 暗号化されたメッセージをコピーして相手に送ってください。これで送信側全ステップ完了です。");
+        s3.add("h3",0,"4. 暗号化されたメッセージをコピーして相手に送ってください。これで送信側全ステップ完了です。");
         s3.output = s3.add(new TextArea(true));
         s3.btn = s3.add("div","class:btn;","クリップボードにコピー");
         s3.dialogue = s3.add(new DialogueBanner);
@@ -263,10 +211,10 @@ class SenderGUI extends ELEM{
 
 class ReceiverGUI extends ELEM{
     constructor(){
-        super("div",0,0,"text-align:center;display:none;");
+        super("div",0,0,"display:none;");
         let s1 = this.add(new UISection);
         s1.show();
-        s1.add("h3",0,"1. 下に表示される公開鍵をコピーして相手に送って下さい(毎回ランダムに生成されます)");
+        s1.add("h3",0,"2. 下に表示される公開鍵をコピーして相手に送って下さい(毎回ランダムに生成されます)");
         s1.output = s1.add(new TextArea(true));
         let keyPair;
         const generate = async function(){
@@ -282,11 +230,11 @@ class ReceiverGUI extends ELEM{
             navigator.clipboard.writeText(s1.output.e.value);
             s1.dialogue.success("テキストをコピーしました。");
         });
-        s1.genbtn = s1.add("div","class:btn","再生成");
+        s1.genbtn = s1.add("div","class:btn","再生成↻");
         s1.genbtn.on("click",generate);
         s1.dialogue = s1.add(new DialogueBanner);
         let s2 = this.add(new UISection);
-        s2.add("h3",0,"2. 送信者から届いた暗号メッセージを貼って下さい");
+        s2.add("h3",0,"3. 送信者から届いた暗号メッセージを貼って下さい");
         s2.input = s2.add(new TextArea);
         s2.input.on("input",async ()=>{
             if(!keyPair.privateKey){
@@ -306,7 +254,7 @@ class ReceiverGUI extends ELEM{
         });
         s2.dialogue = s2.add(new DialogueBanner);
         let s3 = this.add(new UISection);
-        s3.add("h3",0,"3. 暗号の内容が表示されます");
+        s3.add("h3",0,"4. 暗号の内容が表示されます");
         s3.output = s3.add(new TextArea(true));
         generate();
     }
@@ -315,16 +263,21 @@ class ReceiverGUI extends ELEM{
 
 (async ()=>{
     let locale = URL.query.lang || "EN";
-    let header = body.add(new Header);
-    let content = body.add("article","class:content",0,`
-        max-width:900px;
-        margin:0 auto;
-        padding: 1em;
-        padding-top: 0em;
-        overflow: hidden;
-    `);
+    let header = body.add("header");
+    let h1 = header.add("h1");
+    h1.add("span",0,"🔐メッセージ","display:inline-block");
+    h1.add("span",0,"暗号化サービス","display:inline-block");
+    header.add("p",0,"手順を踏んでコピペするだけ。YouTubeコメント欄、Discordなどどのサービスでも使えます。");
+    let ul = header.add("ul",0,0,"max-width:500px;margin:0 auto;");
+    ul.add("h2",0,"注意事項");
+    ul.add("li",0,"送信側はリロードするとセキュリティーのため古い鍵が消去されるので、タブを開けたままにしてください。","font-size:1rem;text-align:left;");
+    ul.add("li",0,"スマホでも使えますがPCをお勧めします。","font-size:1rem;text-align:left;");
+    //this.add("h2",0,"↓スクロールする↓");
+    let content = body.add("article","class:content");
     //content.add("h2",0,"メッセージを[送りたい|受け取りたい]");
-    let h2 = content.add("h2",0,"メッセージを");
+    let s1 = content.add("section");
+    let h3 = s1.add("h3",0,"1. 送信側/受信側を選択");
+    let h2 = s1.add("h4",0,"メッセージを");
     let select = h2.add(new Selector("送りたい","受け取りたい"));
     let sgui = content.add(new SenderGUI);
     let rgui = content.add(new ReceiverGUI);
@@ -336,4 +289,5 @@ class ReceiverGUI extends ELEM{
         guis.map(ui=>ui.style("display:none;"));
         guis[val].style("display:block;");
     });
+    body.add("footer",0,"Ⓒ2022 martian17.com All rights reserved");
 })();
