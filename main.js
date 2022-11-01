@@ -362,7 +362,7 @@ let localeCodeMapReverse = ["EN","JP"];
     let warn = header.add("div",0,0,"max-width:500px;margin:0 auto;");
     //warn.add("h2",0,["⚠️Warning⚠️","⚠️注意事項⚠️"][locale]);
     warn.add("ul").add("li",0,[
-        "Keys will be deleted every time the page refreshes for a security reason. Please keep the tab open throughout all the four steps.",
+        "Keys will be deleted every time the page refreshes for a security reason. Please keep the tab open throughout all the steps.",
         "セキュリティーのためリロード時に古い鍵が消去されるので、タブを開けたままにしてください。"
     ][locale],"font-size:1rem;text-align:left;");
     /*ul.add("li",0,[
