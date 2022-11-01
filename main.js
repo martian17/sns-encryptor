@@ -363,7 +363,7 @@ let localeCodeMapReverse = ["EN","JP"];
     warn.add("h2",0,["⚠️Warning⚠️","⚠️注意事項⚠️"][locale]);
     warn.add("ul").add("li",0,[
         "Keys will be deleted every time the page refreshes for a security reason. Please keep the tab open throughout all the four steps.",
-        "送信側はリロードするとセキュリティーのため古い鍵が消去されるので、タブを開けたままにしてください。"
+        "セキュリティーのためリロード時に古い鍵が消去されるので、タブを開けたままにしてください。"
     ][locale],"font-size:1rem;text-align:left;");
     /*ul.add("li",0,[
         "This site can be used on a smartphone, but it is more optimized for a use on PC.",
