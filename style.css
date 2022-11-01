@@ -1,0 +1,132 @@
+body{
+    margin:0px;
+    font-family:Arial;
+}
+
+header{
+    position:relative;
+    overflow:hidden;
+}
+
+.selector{
+    display:inline-block;
+    border: 2px #888 solid;
+    border-radius:0.3em;
+    overflow:hidden;
+    vertical-align: bottom;
+    line-height: 1em;
+}
+
+.selector>span{
+    display: inline-block;
+    padding: 0.2em;
+    box-shadow: rgb(188 188 188) 0px 0px 10px inset;
+    background-color: #e7e7e7;
+}
+
+.selector>span:hover{
+    background-color: #e7e7e7;
+    box-shadow: rgb(91 91 91) 0px 0px 10px inset;
+}
+
+.selector>span.selected{
+    background-color: #e7e7e7;
+    box-shadow: rgb(91 91 91) 0px 0px 10px inset;
+}
+
+
+
+.btn{
+    display: inline-block;
+    padding: 0.5em;
+    border: 2px #888 solid;
+    background-color: #e7e7e7;
+    color: #000;
+    border-radius: 0.5em;
+    box-shadow: rgb(188 188 188) 0px 0px 10px inset;
+    margin: 1em;
+    font-weight: 900;
+}
+
+
+.btn:hover{
+    background-color: #e7e7e7;
+    box-shadow: rgb(91 91 91) 0px 0px 10px inset;
+}
+
+
+.underlay{
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0px;
+    left:0px;
+    z-index:-1;
+}
+
+.gibberish{
+    position:absolute;
+    padding:1em;
+    box-shadow: 0px 0px 10px #0008;
+    transform:translate(-50%, -50%);
+    border-radius:1em;
+}
+
+.gibberish>div{
+    position:absolute;
+    bottom:-15px;
+}
+
+.overlay{
+    width:100%;
+    height:100%;
+    background-color:#fffa;
+    color:#000;
+    text-align:center;
+    overflow:hidden;
+}
+
+.overlay h1{
+    margin-top:150px;
+    font-size:6vw;
+}
+
+.overlay h2{
+    font-size:3vw;
+    font-weight:100;
+}
+
+.overlay p{
+    font-size:1.5rem;
+    padding:0px 3em;
+}
+
+@media only screen and (max-width: 600px) {
+    .overlay h1{
+        margin-top:50px;
+        font-size:10vw;
+    }
+    .overlay h2{
+        font-size:1.5em;
+    }
+    .overlay p{
+        font-size:1em;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .overlay h1{
+        font-size:60px;
+    }
+    .overlay h2{
+        font-size:30px;
+    }
+}
+
+.content h2{
+    font-size:2em;
+    text-align:center;
+}
+
+
+
