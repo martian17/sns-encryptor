@@ -169,6 +169,10 @@ class SenderGUI extends ELEM{
             "2. 下に相手から貰った公開鍵を貼ってください"
         ][locale]);
         s1.input = s1.add(new TextArea);
+        s1.add("div","class:btn;",[
+            "Clear input",
+            "クリア"
+        ][locale]).on("click",()=>s1.input.e.value="");
         s1.dialogue = s1.add(new DialogueBanner);
         let pubkey;
         s1.input.on("input",async ()=>{
@@ -198,6 +202,14 @@ class SenderGUI extends ELEM{
             "3. 暗号化するメッセージを入力してください"
         ][locale]);
         s2.input = s2.add(new TextArea);
+        s2.input.on("input",()=>{
+            s2.dialogue.hide();
+            s3.dialogue.hide();
+        });
+        s2.add("div","class:btn;",[
+            "Clear input",
+            "クリア"
+        ][locale]).on("click",()=>s2.input.e.value="");
         s2.btn = s2.add("div","class:btn;",[
             "Encrypt",
             "暗号化する"
@@ -293,6 +305,10 @@ class ReceiverGUI extends ELEM{
             "3. 送信者から届いた暗号メッセージを貼って下さい"
         ][locale]);
         s2.input = s2.add(new TextArea);
+        s2.add("div","class:btn;",[
+            "Clear input",
+            "クリア"
+        ][locale]).on("click",()=>s2.input.e.value="");
         s2.input.on("input",async ()=>{
             if(!keyPair.privateKey){
                 s2.dialogue.warn([
